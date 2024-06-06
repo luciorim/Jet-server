@@ -14,7 +14,7 @@ public class Airport {
     private int coordinateX;
     private int coordinateY;
 
-    private void addBoard(String board) {
+    public void addBoard(String board) {
         int index = boards.indexOf(board);
         if(index == -1){
             boards.add(board);
@@ -23,7 +23,7 @@ public class Airport {
         }
     }
 
-    private void removeBoard(String board) {
+    public void removeBoard(String board) {
         boards.remove(board);
     }
 }
