@@ -37,9 +37,9 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.springframework.kafka</groupId>
-            <artifactId>spring-kafka-test</artifactId>
-            <scope>test</scope>
+            <groupId>com.luciorim</groupId>
+            <artifactId>common</artifactId>
+            <version>1.0.0</version>
         </dependency>
     </dependencies>
 
