@@ -2,7 +2,7 @@ package com.luciorim.office.config;
 
 import com.github.benmanes.caffeine.cache.Cache;
 import com.github.benmanes.caffeine.cache.Caffeine;
-import com.luciorim.common.utils.MessageConverter;
+import com.luciorim.common.utils.MessagesConverter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.socket.WebSocketSession;
@@ -13,8 +13,8 @@ import java.util.concurrent.TimeUnit;
 public class ApplicationConfig {
 
     @Bean
-    public MessageConverter messageConverter() {
-        return new MessageConverter();
+    public MessagesConverter messageConverter() {
+        return new MessagesConverter();
     }
 
     @Bean

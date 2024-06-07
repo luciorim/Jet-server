@@ -2,7 +2,7 @@ package com.luciorim.office.handler;
 
 import com.github.benmanes.caffeine.cache.Cache;
 import com.luciorim.common.messages.OfficeStateMessage;
-import com.luciorim.common.utils.MessageConverter;
+import com.luciorim.common.utils.MessagesConverter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -18,7 +18,7 @@ public class OfficeSocketHandler extends TextWebSocketHandler {
 
     private final KafkaTemplate<String, String> kafkaTemplate;
     private final Cache<String, WebSocketSession> sessionCache;
-    private final MessageConverter messageConverter;
+    private final MessagesConverter messagesConverter;
 
     @Override
     protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
@@ -29,7 +29,7 @@ public class OfficeSocketHandler extends TextWebSocketHandler {
 
         if (message.getPayload().equals("update")) {
             kafkaTemplate
-                    .sendDefault(messageConverter.toJson(new OfficeStateMessage()));
+                    .sendDefault(messagesConverter.toJson(new OfficeStateMessage()));
         }
 
         super.handleTextMessage(session, message);

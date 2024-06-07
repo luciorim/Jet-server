@@ -3,7 +3,7 @@ package com.luciorim.office.listeners;
 import com.github.benmanes.caffeine.cache.Cache;
 import com.luciorim.common.messages.Message;
 import com.luciorim.common.processor.MessageProcessor;
-import com.luciorim.common.utils.MessageConverter;
+import com.luciorim.common.utils.MessagesConverter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +21,7 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class MessageListener {
 
-    private final MessageConverter messageConverter;
+    private final MessagesConverter messagesConverter;
     private final Cache<String, WebSocketSession> socketSessionCache;
 
     @Autowired
@@ -32,7 +32,7 @@ public class MessageListener {
 
         sendKafkaMessageToSocket(data);
 
-        String code = messageConverter.extractCode(data);
+        String code = messagesConverter.extractCode(data);
         try {
             messageProcessors.get(code).process(data);
         }catch (Exception e){

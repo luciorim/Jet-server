@@ -1,7 +1,7 @@
 package com.luciorim.office.config;
 
 import com.github.benmanes.caffeine.cache.Cache;
-import com.luciorim.common.utils.MessageConverter;
+import com.luciorim.common.utils.MessagesConverter;
 import com.luciorim.office.handler.OfficeSocketHandler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
@@ -18,14 +18,12 @@ public class OfficeSocketConfiguration implements WebSocketConfigurer {
 
     private final KafkaTemplate<String, String> kafkaTemplate;
     private final Cache<String, WebSocketSession> sessionCache;
-    private final MessageConverter messageConverter;
-
-
+    private final MessagesConverter messagesConverter;
 
     @Override
     public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
         registry
-                .addHandler(new OfficeSocketHandler(kafkaTemplate, sessionCache, messageConverter))
+                .addHandler(new OfficeSocketHandler(kafkaTemplate, sessionCache, messagesConverter), "/ws")
                 .setAllowedOrigins("*");
     }
 }

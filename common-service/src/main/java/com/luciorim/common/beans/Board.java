@@ -26,7 +26,7 @@ public class Board {
         return route != null;
     }
 
-    private void calculatePosition(RoutePath routeDirection){
+    public void calculatePosition(RoutePath routeDirection){
         double t = routeDirection.getProgress()/100.0;
 
         double toX = (1 - t) * routeDirection.getFrom().getCoordinateX() + t * routeDirection.getTo().getCoordinateX();

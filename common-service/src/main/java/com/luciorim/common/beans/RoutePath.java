@@ -25,7 +25,7 @@ public class RoutePath {
     }
 
 
-    public boolean idDone(){
+    public boolean isDone(){
         return progress == 100;
     }
 }

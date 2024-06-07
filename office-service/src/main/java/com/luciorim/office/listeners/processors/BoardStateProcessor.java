@@ -6,7 +6,7 @@ import com.luciorim.common.beans.Route;
 import com.luciorim.common.messages.AirportStateMessage;
 import com.luciorim.common.messages.BoardStateMessage;
 import com.luciorim.common.processor.MessageProcessor;
-import com.luciorim.common.utils.MessageConverter;
+import com.luciorim.common.utils.MessagesConverter;
 import com.luciorim.office.provider.AirportsProvider;
 import com.luciorim.office.provider.BoardsProvider;
 import com.luciorim.office.services.WaitingRoutesService;
@@ -22,7 +22,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class BoardStateProcessor implements MessageProcessor<BoardStateMessage> {
 
-    private final MessageConverter messageConverter;
+    private final MessagesConverter messagesConverter;
     private final KafkaTemplate<String, String> kafkaTemplate;
 
     private final WaitingRoutesService waitingRoutesService;;
@@ -33,7 +33,7 @@ public class BoardStateProcessor implements MessageProcessor<BoardStateMessage> 
     @Override
     public void process(String jsonMessage){
 
-        var message = messageConverter.extractMessage(jsonMessage, BoardStateMessage.class);
+        var message = messagesConverter.extractMessage(jsonMessage, BoardStateMessage.class);
 
         Board board = message.getBoard();
         Optional<Board> previousBoard = boardsProvider.getBoard(board.getName());
@@ -49,7 +49,7 @@ public class BoardStateProcessor implements MessageProcessor<BoardStateMessage> 
         if (previousBoard.isEmpty() || !board.isBusy() && previousBoard.get().isBusy()) {
             airport.addBoard(board.getName());
 
-            kafkaTemplate.sendDefault(messageConverter.toJson(new AirportStateMessage(airport)));
+            kafkaTemplate.sendDefault(messagesConverter.toJson(new AirportStateMessage(airport)));
         }
 
     }

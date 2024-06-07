@@ -3,7 +3,7 @@ package com.luciorim.common.utils;
 import com.google.gson.Gson;
 import com.luciorim.common.messages.Message;
 
-public class MessageConverter {
+public class MessagesConverter {
 
     private final Gson gson = new Gson();
 

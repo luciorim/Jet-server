@@ -3,7 +3,7 @@ package com.luciorim.office.listeners.processors;
 import com.luciorim.common.messages.AirportStateMessage;
 import com.luciorim.common.messages.OfficeStateMessage;
 import com.luciorim.common.processor.MessageProcessor;
-import com.luciorim.common.utils.MessageConverter;
+import com.luciorim.common.utils.MessagesConverter;
 import com.luciorim.office.provider.AirportsProvider;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class OfficeStateProcessor implements MessageProcessor<OfficeStateMessage> {
 
-    private final MessageConverter messageConverter;
+    private final MessagesConverter messagesConverter;
     private final AirportsProvider airportsProvider;
     private final KafkaTemplate<String, String> kafkaTemplate;
 
@@ -24,7 +24,7 @@ public class OfficeStateProcessor implements MessageProcessor<OfficeStateMessage
 
         airportsProvider.getPorts().forEach(airport -> {
 
-            kafkaTemplate.sendDefault(messageConverter.toJson(new AirportStateMessage(airport)));
+            kafkaTemplate.sendDefault(messagesConverter.toJson(new AirportStateMessage(airport)));
 
         });
 

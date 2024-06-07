@@ -6,7 +6,7 @@ import com.luciorim.common.beans.Route;
 import com.luciorim.common.beans.RoutePath;
 import com.luciorim.common.messages.AirportStateMessage;
 import com.luciorim.common.messages.OfficeRouteMessage;
-import com.luciorim.common.utils.MessageConverter;
+import com.luciorim.common.utils.MessagesConverter;
 import com.luciorim.office.provider.AirportsProvider;
 import com.luciorim.office.provider.BoardsProvider;
 import com.luciorim.office.services.PathService;
@@ -31,7 +31,7 @@ public class RouteDistributionJob {
     private final AirportsProvider airportsProvider;
 
     private final KafkaTemplate<String, String> kafkaTemplate;
-    private final MessageConverter messageConverter;
+    private final MessagesConverter messagesConverter;
 
     @Scheduled(initialDelay = 500, fixedDelay = 2500)
     public void distributeRoutes() {
@@ -79,8 +79,8 @@ public class RouteDistributionJob {
         Airport airport = airportsProvider.getAirportByName(board.getLocation());
 
         board.setLocation(null);
-        kafkaTemplate.sendDefault(messageConverter.toJson(new OfficeRouteMessage(route)));
-        kafkaTemplate.sendDefault(messageConverter.toJson(new AirportStateMessage(airport)));
+        kafkaTemplate.sendDefault(messagesConverter.toJson(new OfficeRouteMessage(route)));
+        kafkaTemplate.sendDefault(messagesConverter.toJson(new AirportStateMessage(airport)));
 
     }
 
