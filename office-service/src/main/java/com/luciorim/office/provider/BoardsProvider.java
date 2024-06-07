@@ -1,7 +1,6 @@
 package com.luciorim.office.provider;
 
 import com.luciorim.common.beans.Board;
-import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -12,7 +11,6 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 @Component
-@Getter
 @Slf4j
 public class BoardsProvider {
 
@@ -43,4 +41,9 @@ public class BoardsProvider {
         }
 
     }
+
+    public List<Board> getBoards() {
+        return boards;
+    }
+
 }

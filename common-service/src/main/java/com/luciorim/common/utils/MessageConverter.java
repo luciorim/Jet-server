@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.luciorim.common.messages.Message;
 
 public class MessageConverter {
+
     private final Gson gson = new Gson();
 
     public String extractCode(String data){

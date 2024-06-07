@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class RoutePath {
+
     private RoutePoint from;
     private RoutePoint to;
     private double progress;

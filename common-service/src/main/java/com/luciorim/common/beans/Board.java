@@ -8,6 +8,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Board {
+
     private String name;
     private String location;
     private Route route;
@@ -17,8 +18,12 @@ public class Board {
     private double coordinateY;
     private double angle;
 
-    private boolean isNotBusy(){
+    public boolean isNotBusy(){
         return !isBusy;
+    }
+
+    public boolean hasRoute(){
+        return route != null;
     }
 
     private void calculatePosition(RoutePath routeDirection){

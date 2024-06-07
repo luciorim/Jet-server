@@ -10,9 +10,9 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Route {
+public class  Route {
     private String boardName;
-    private List<RoutePoint> path = new ArrayList<>();
+    private List<RoutePath> path = new ArrayList<>();
 
     public boolean isNotAssigned(){
         return boardName == null;
